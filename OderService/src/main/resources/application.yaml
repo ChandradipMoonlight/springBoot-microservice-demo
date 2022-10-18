@@ -15,18 +15,16 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  config:
+    import: configserver:http://localhost:9296
 
 # eureka Client Configuration
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: ${EUREKA_SERVER-ADDRESS:http://localhost:8761/eureka}
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: ${EUREKA_SERVER-ADDRESS:http://localhost:8761/eureka}
 
-
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ANT_PATH_MATCHER
