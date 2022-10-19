@@ -19,6 +19,10 @@ public class OrderServiceImpl implements OrderService {
     private ModelMapper modelMapper;
     @Override
     public OrderResponse placeOrder(OrderRequest orderRequest) {
+        //Order entity -> Save the data with status order created
+        //Product Service -> Block Products(reduce the quantity)
+        //payment Service -> Payments -> Success -> COMPLETED else CANCELLED
+
         log.info("Inside OrderService class placeOrder Method!");
         Orders createOrder = modelMapper.map(orderRequest, Orders.class);
         createOrder.setOrderStatus("CREATED");

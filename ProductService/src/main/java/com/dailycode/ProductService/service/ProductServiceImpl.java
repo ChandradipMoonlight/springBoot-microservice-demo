@@ -10,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class ProductServiceImpl implements ProductService {
@@ -31,5 +34,32 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(()->new ProductCustomException("Product Not Found with Id given Id",
                         ProductCustomException.ExceptionType.PRODUCT_NOT_FOUND));
         return modelMapper.map(product, ProductResponse.class);
+    }
+
+    @Override
+    public long reduceQuantity(long productId, long productQuantity) {
+        log.info("Reduce quantity {} for Id : {}", productQuantity, productId);
+        Product product = productRepo.findById(productId)
+                .orElseThrow(()->new ProductCustomException("Product is not found with given Id",
+                        ProductCustomException.ExceptionType.PRODUCT_NOT_FOUND));
+        long remainingQuantity;
+        if (product.getQuantity()>=productQuantity) {
+            remainingQuantity = product.getQuantity()-productQuantity;
+            product.setQuantity(remainingQuantity);
+        } else {
+            throw new ProductCustomException("Product does not have sufficient quantity!",
+                    ProductCustomException.ExceptionType.INSUFFICIENT_QUANTITY);
+        }
+        log.info("Reduced Quantity after Order is placed : {}", remainingQuantity);
+        return remainingQuantity;
+    }
+
+    @Override
+    public List<ProductResponse> getAllProducts() {
+        List<ProductResponse> products = productRepo.findAll()
+                .stream()
+                .map(product -> modelMapper.map(product, ProductResponse.class))
+                .collect(Collectors.toList());
+        return products;
     }
 }

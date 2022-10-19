@@ -5,7 +5,7 @@ public class ProductCustomException extends RuntimeException {
 
     public enum ExceptionType {
         PRODUCT_NOT_FOUND,
-        PRODUCT_ALREADY_PRESENT,
+        PRODUCT_ALREADY_PRESENT, OUT_OF_STOCK, INSUFFICIENT_QUANTITY,
     }
 
     private String msg;
