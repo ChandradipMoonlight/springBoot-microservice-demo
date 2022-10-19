@@ -45,7 +45,7 @@ public class ProductController {
 
     @PutMapping("/reduceProductQuantity/{productId}")
     public ResponseEntity<ResponseDTO> reduceProductQuantity(@PathVariable("productId") long productId,
-                                                             long productQuantity) {
+                                                            @RequestParam long productQuantity) {
         ResponseDTO responseDTO = new ResponseDTO("Quantity After order is placed",
                 productService.reduceQuantity(productId, productQuantity));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);

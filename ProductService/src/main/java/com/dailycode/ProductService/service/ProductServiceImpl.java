@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.getQuantity()>=productQuantity) {
             remainingQuantity = product.getQuantity()-productQuantity;
             product.setQuantity(remainingQuantity);
+            productRepo.save(product);
         } else {
             throw new ProductCustomException("Product does not have sufficient quantity!",
                     ProductCustomException.ExceptionType.INSUFFICIENT_QUANTITY);
