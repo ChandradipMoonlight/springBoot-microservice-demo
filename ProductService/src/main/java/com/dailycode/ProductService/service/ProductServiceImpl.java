@@ -63,4 +63,14 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
         return products;
     }
+
+    @Override
+    public ProductResponse updateProductQuantity(long productId, long productQuantity) {
+        Product product = productRepo.findById(productId)
+                .orElseThrow(()->new ProductCustomException("Product is not found with given Id",
+                        ProductCustomException.ExceptionType.PRODUCT_NOT_FOUND));
+        product.setQuantity(productQuantity);
+        productRepo.save(product);
+        return modelMapper.map(product, ProductResponse.class);
+    }
 }

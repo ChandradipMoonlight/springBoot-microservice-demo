@@ -17,7 +17,6 @@ import java.time.LocalDate;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private long orderId;
     private long productId;
     private long quantity;

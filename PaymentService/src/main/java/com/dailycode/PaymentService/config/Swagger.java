@@ -1,4 +1,5 @@
-package com.dailycode.ProductService.configuration;
+package com.dailycode.PaymentService.config;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ public class Swagger {
     public Docket orderApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.dailycode.ProductService"))
+                .apis(RequestHandlerSelectors.basePackage("com.dailycode.PaymentService"))
                 .build()
                 .apiInfo(metaData());
     }
@@ -27,7 +28,7 @@ public class Swagger {
     private ApiInfo metaData() {
         return new ApiInfo(
                 "Spring Boot REST API",
-                "Spring Boot REST API for ProductService",
+                "Spring Boot REST API for PaymentService",
                 "1.0",
                 "Terms of service",
                 new Contact("Moonlight",

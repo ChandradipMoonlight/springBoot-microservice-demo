@@ -1,4 +1,6 @@
-package com.dailycode.OderService.model;
+package com.dailycode.PaymentService.model;
+
+import lombok.Data;
 
 public enum PaymentMode {
     CASH,
