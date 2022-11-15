@@ -5,10 +5,7 @@ import com.dailycode.OderService.external.client.PaymentService;
 import com.dailycode.OderService.external.client.ProductService;
 import com.dailycode.OderService.external.exception.CustomException;
 import com.dailycode.OderService.external.request.PaymentRequest;
-import com.dailycode.OderService.model.OrderRequest;
-import com.dailycode.OderService.model.OrderResponse;
-import com.dailycode.OderService.model.ProductResponse;
-import com.dailycode.OderService.model.ResponseDTO;
+import com.dailycode.OderService.model.*;
 import com.dailycode.OderService.repository.OrderRepository;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -62,7 +59,6 @@ public class OrderServiceImpl implements OrderService {
        log.info("Order is placed Successfully! : {}", saveOrder);
 
         OrderResponse orderResponse = modelMapper.map(saveOrder, OrderResponse.class);
-        orderResponse.setPaymentMode(paymentRequest.getPaymentMode());
         return orderResponse;
     }
 
@@ -79,8 +75,16 @@ public class OrderServiceImpl implements OrderService {
                 ResponseDTO.class);
         ProductResponse productResponse = modelMapper.map(responseDTO.getData(), ProductResponse.class);
         log.info("Product Details: {}", productResponse);
+        log.info("Invoking PaymentService to get Payment Details for given orderId: {}", orderId);
+        ResponseDTO responseDTO1 = restTemplate.getForObject(
+                "http://PAYMENT-SERVICE/payment/"+orderId,
+                ResponseDTO.class
+        );
+        log.info("Payment Details Fetched : {}", responseDTO1.getData());
+        PaymentResponse paymentResponse = modelMapper.map(responseDTO1.getData(), PaymentResponse.class);
         OrderResponse orderResponse = modelMapper.map(orders, OrderResponse.class);
         orderResponse.setProductResponse(productResponse);
+        orderResponse.setPaymentResponse(paymentResponse);
         return orderResponse;
     }
 }

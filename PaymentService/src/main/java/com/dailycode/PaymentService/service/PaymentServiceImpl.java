@@ -34,4 +34,12 @@ public class PaymentServiceImpl implements PaymentService {
         log.info("Transaction is completed : {}", transactionDetails);
         return modelMapper.map(savedTransaction, PaymentResponse.class);
     }
+
+    @Override
+    public PaymentResponse getPaymentDetailsByOrderId(long orderId) {
+        log.info("Inside getPaymentDetailsByOrderId() method of PaymentService Class!\n" +
+                "Fetching PaymentDetails for given OrderId : {}", orderId);
+        TransactionDetails transactionDetails = transactionRepository.findByOrderId(orderId);
+        return modelMapper.map(transactionDetails, PaymentResponse.class);
+    }
 }

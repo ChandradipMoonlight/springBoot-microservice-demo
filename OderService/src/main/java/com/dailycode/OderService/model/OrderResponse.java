@@ -18,9 +18,9 @@ public class OrderResponse{
     private long productId;
     private long quantity;
     private long amount;
-    private PaymentMode paymentMode;
     private Instant orderDate;
     private LocalDate createdDate;
     private LocalDate updatedDate;
     private ProductResponse productResponse;
+    private PaymentResponse paymentResponse;
 }
