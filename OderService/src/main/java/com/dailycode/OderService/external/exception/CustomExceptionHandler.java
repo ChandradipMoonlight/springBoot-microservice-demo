@@ -11,7 +11,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> HandleCustomExceptionException(CustomException exception) {
-        ErrorResponse response = new ErrorResponse(exception.getMsg(), exception.getType().name(), HttpStatus.NOT_FOUND.value());
+        ErrorResponse response = new ErrorResponse(exception.getMessage(), exception.getType().name(), HttpStatus.NOT_FOUND.value());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }

@@ -5,4 +5,6 @@ import com.dailycode.OderService.model.OrderResponse;
 
 public interface OrderService {
     OrderResponse placeOrder(OrderRequest orderRequest);
+
+    OrderResponse getOrderDetails(long orderId);
 }

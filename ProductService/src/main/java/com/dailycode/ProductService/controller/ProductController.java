@@ -29,8 +29,10 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     public ResponseEntity<ResponseDTO> getProductById(@PathVariable("productId") long productId){
+        log.info("Inside getProductById() method of ProductController!");
         ResponseDTO response = new ResponseDTO("Product is Fetched!",
                 productService.getProductById(productId));
+        log.info(response.getMessage()+" {}", response.getData());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

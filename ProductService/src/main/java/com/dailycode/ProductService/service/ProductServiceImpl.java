@@ -30,6 +30,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getProductById(long productId) {
+        log.info("Inside getProductById() method of ProductService class!");
+        log.info("Getting Product Details for given Id : {}",productId);
         Product product = productRepo.findById(productId)
                 .orElseThrow(()->new ProductCustomException("Product Not Found with Id given Id",
                         ProductCustomException.ExceptionType.PRODUCT_NOT_FOUND));

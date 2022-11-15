@@ -9,13 +9,14 @@ public class CustomException extends RuntimeException {
         PRODUCT_NOT_FOUND,
         INSUFFICIENT_QUANTITY,
         INTERNAL_SERVER_ERROR,
+        ORDER_NOT_FOUND,
     }
 
     private String msg;
     private CustomException.ExceptionType type;
 
     public CustomException(String msg){
-        this.msg=msg;
+        super(msg);
     }
 
     public CustomException(String msg, ExceptionType type) {

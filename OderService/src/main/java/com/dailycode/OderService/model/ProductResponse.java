@@ -4,23 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Builder
-public class OrderResponse{
+public class ProductResponse {
 
-    private long orderId;
     private long productId;
+    private String productName;
     private long quantity;
-    private long amount;
-    private PaymentMode paymentMode;
-    private Instant orderDate;
+    private long price;
     private LocalDate createdDate;
     private LocalDate updatedDate;
-    private ProductResponse productResponse;
 }
